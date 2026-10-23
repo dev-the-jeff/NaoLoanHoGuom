@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#171d20"><meta name="description" content="Road Riot M3 — three-lane motorcycle multiplayer prototype."><link rel="icon" href="data:,"><title>ROAD RIOT — Multiplayer / M3</title></head>
+<body>
+  <canvas id="game" aria-label="3D motorcycle practice road"></canvas>
+  <div class="vignette" aria-hidden="true"></div>
+  <header class="topbar"><a class="wordmark" href="./" aria-label="Road Riot home">ROAD<span>//</span>RIOT<span class="edition">M3</span></a><div class="session"><span class="live-dot"></span> <span id="session-text">LOCAL RIDING / 3 LANES</span></div><button id="network-open" class="small-button" type="button">ONLINE</button><button id="pause" class="small-button" type="button" disabled>PAUSE <kbd>ESC</kbd></button></header>
+  <main id="overlay" class="overlay">
+    <div class="intro"><div class="eyebrow">SINGLE PLAYER PROTOTYPE <span>001</span></div><h1 id="overlay-title">RIDE THE<br><em>REDLINE.</em></h1><p id="overlay-copy">One bike. An open canyon.<br>Find your line and give it everything.</p><button id="ride" class="ride-button" type="button">LET’S RIDE <span aria-hidden="true">↗</span></button><button id="online-open" class="online-button" type="button">MULTIPLAYER · CREATE / JOIN ↗</button><div class="intro-note">LOCAL PRACTICE · NO SERVER REQUIRED</div><div class="control-grid"><div><kbd>W</kbd><kbd>S</kbd> THROTTLE / BRAKE</div><div><kbd>A</kbd><kbd>D</kbd> STEER</div><div><kbd>SHIFT</kbd> HOLD NITRO</div><div><kbd>R</kbd> RESTART RIDE</div></div><p class="fineprint">Arrow keys also work. Desktop keyboard required.</p></div>
+    <div class="route-label"><span>THE CANYON RUN</span><strong>3.4 <small>KM</small></strong><span>3 LANES / 9 ORDERED GATES</span></div>
+  </main>
+  <aside id="online-panel" class="online-panel" aria-label="Multiplayer room" hidden>
+    <div class="panel-heading"><h2>RIDE TOGETHER</h2><button id="close-online" type="button" aria-label="Close room panel">×</button></div>
+    <div id="connection-form">
+      <label for="nickname">GUEST NICKNAME</label><input id="nickname" maxlength="20" autocomplete="nickname" placeholder="Your name">
+      <button id="create-room" class="panel-primary" type="button">CREATE PRIVATE ROOM</button>
+      <div class="join-divider">OR JOIN A COLLEAGUE</div>
+      <label for="room-code">6-CHARACTER ROOM CODE</label><input id="room-code" maxlength="6" autocomplete="off" placeholder="ABC234" spellcheck="false">
+      <button id="join-room" class="panel-secondary" type="button">JOIN ROOM</button>
+      <p class="panel-help">Same network: open the host computer’s LAN address. The multiplayer server must also be running.</p>
+    </div>
+    <div id="room-state" hidden>
+      <div class="room-info"><div><small>ROOM CODE</small><strong id="room-code-display"></strong></div><span id="player-count"></span></div>
+      <ul id="roster" aria-label="Connected players"></ul>
+      <p id="phase-status" role="status">Waiting for room…</p>
+      <button id="ready" class="panel-primary" type="button">READY</button>
+      <button id="start-race" class="panel-secondary" type="button">HOST · START</button>
+      <button id="leave-room" class="panel-quiet" type="button">LEAVE ROOM</button>
+      <p class="panel-help">M3 point-to-point race. Pass every checkpoint. First finisher opens a 45-second finish window. R: brake below 15 km/h, then reset safely. Esc brakes while the race continues.</p>
+    </div>
+    <p id="connection-notice" class="connection-notice" role="status" aria-live="polite"></p>
+  </aside>
+  <section id="hud" class="hud" aria-label="Riding instruments">
+    <div class="speed-panel"><span class="instrument-label">GROUND SPEED</span><div class="speed-reading"><strong id="speed">000</strong><span>KM/H</span></div><div class="speed-track"><div id="speed-fill"></div></div></div>
+    <div class="trip-panel"><span class="instrument-label">ROUTE DISTANCE</span><strong><span id="distance">0000</span><small> / 3400 M</small></strong><span id="ride-status">READY WHEN YOU ARE</span></div>
+    <div class="nitro-panel"><div class="nitro-title"><span class="instrument-label">NITRO RESERVE</span><strong><span id="nitro-value">100</span><small>%</small></strong></div><div class="nitro-track"><div id="nitro-fill"></div></div><span id="nitro-status">SHIFT TO BOOST · 3 SEC BURST</span></div>
+  </section>
+  <footer><span><b>WASD</b> RIDE <i>/</i> <b>SHIFT</b> NITRO <i>/</i> <b>R</b> RESET <i>/</i> <b>ESC</b> PAUSE</span><span>MILESTONE 03 <i>—</i> RIDING STUDY <span class="footer-dot">●</span></span></footer>
+  <div id="race-countdown" aria-live="polite" hidden></div>
+  <section id="race-hud" class="race-hud" aria-label="Race progress" hidden><strong id="race-summary"></strong><div class="race-track"><div id="race-progress"></div></div><small id="reset-status"></small></section>
+  <p id="race-notice" class="race-notice" role="status" hidden></p>
+  <section id="results" class="results" aria-label="Final standings" hidden><div class="results-card"><div class="eyebrow">CANYON RUN · M3</div><h2>FINAL STANDINGS</h2><div class="results-scroll"><table><thead><tr><th>POS</th><th>RIDER</th><th>TIME</th><th>CP</th></tr></thead><tbody id="result-rows"></tbody></table></div><p id="results-help"></p><button id="rematch" class="panel-primary" type="button">HOST · BACK TO LOBBY</button><button id="results-leave" class="panel-quiet" type="button">LEAVE ROOM</button></div></section>
+  <pre id="debug" hidden></pre>
+  <section id="error" class="error" role="alert" hidden><h2>Unable to start the ride</h2><p id="error-message"></p><p>Use current Chrome or Edge with WebGL 2 and hardware acceleration, then reload.</p><button type="button" id="reload">RELOAD</button></section>
+  <script type="module" src="/src/main.ts"></script>
+</body></html>
+
+
